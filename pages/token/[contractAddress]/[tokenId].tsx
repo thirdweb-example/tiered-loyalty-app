@@ -2,6 +2,8 @@ import {
   MediaRenderer,
   ThirdwebNftMedia,
   useAddress,
+  useContract,
+  useNFT,
   useWallet,
 } from "@thirdweb-dev/react";
 import React, { useEffect, useState } from "react";
@@ -51,6 +53,10 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
     createSmartWallet(nft);
   }, [nft, smartWalletAddress, address, wallet]);
 
+  const { contract } = useContract(nftDropAddress);
+  const { data: clientSideNFT } = useNFT(contract, nft.metadata.id);
+  const renderNFT = nft;
+
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
@@ -58,7 +64,7 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
         <div className={styles.container}>
           <div className={styles.metadataContainer}>
             <ThirdwebNftMedia
-              metadata={nft.metadata}
+              metadata={renderNFT.metadata}
               className={styles.image}
             />
           </div>

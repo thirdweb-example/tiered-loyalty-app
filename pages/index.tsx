@@ -21,14 +21,18 @@ import Skeleton from "../components/Skeleton/Skeleton";
 const Home: NextPage = () => {
   const address = useAddress();
   const { contract: nftDropContract } = useContract(nftDropAddress, "nft-drop");
-  const { data: nfts, isLoading } = useOwnedNFTs(nftDropContract, address);
+  const {
+    data: nfts,
+    isLoading,
+    refetch,
+  } = useOwnedNFTs(nftDropContract, address);
   const {
     mutateAsync: claimNft,
     isLoading: loadingClaim,
     error,
   } = useContractWrite(nftDropContract, "claim");
 
-  const claim = async (address: string) => {
+  const claimMembership = async (address: string) => {
     try {
       await claimNft({ args: [address] });
       toast("NFT Claimed!", {
@@ -50,41 +54,27 @@ const Home: NextPage = () => {
       {address ? (
         <div className={styles.container}>
           <h1>Login to your Membership</h1>
-          <p>Click here to enter your membership</p>
+
           {nfts ? (
             nfts.length > 0 ? (
-              <div className={styles.nftContainer}>
-                <NFTComponent
-                  nft={nfts[0]}
-                  emptyText={
-                    "Looks like you don't have a membership. Created a membership to continue"
-                  }
-                />
-              </div>
+              <>
+                <p>Click here to enter your membership</p>
+                <div className={styles.nftContainer}>
+                  <NFTComponent nft={nfts[0]} />
+                </div>
+              </>
             ) : (
-              <div className={styles.btnContainer}>
-                <Web3Button
-                  contractAddress={nftDropAddress}
-                  action={async () => await claim(address)}
-                  onSuccess={() => {
-                    toast("Membership Created!", {
-                      icon: "✅",
-                      style: toastStyle,
-                      position: "bottom-center",
-                    });
-                  }}
-                  onError={(e) => {
-                    console.log(e);
-                    toast(`Membership Creation Failed! Reason: ${e.message}`, {
-                      icon: "❌",
-                      style: toastStyle,
-                      position: "bottom-center",
-                    });
-                  }}
-                >
-                  Create Membership
-                </Web3Button>
-              </div>
+              <>
+                <p>Click here to create a membership</p>
+                <div className={styles.btnContainer}>
+                  <Web3Button
+                    contractAddress={nftDropAddress}
+                    action={async () => await claimMembership(address)}
+                  >
+                    Create Membership
+                  </Web3Button>
+                </div>
+              </>
             )
           ) : (
             <div className={styles.nftContainer}>
