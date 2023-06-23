@@ -43,7 +43,7 @@ const ClaimTokens = () => {
               contractAddress={tokenAddress}
               action={async (contract) => await contract.erc20.claim(100)}
               onSuccess={() => {
-                toast(`NFT Claimed!`, {
+                toast(`Tokens Claimed!`, {
                   icon: "✅",
                   style: toastStyle,
                   position: "bottom-center",
@@ -51,7 +51,7 @@ const ClaimTokens = () => {
               }}
               onError={(e) => {
                 console.log(e);
-                toast(`NFT Claim Failed! Reason: ${(e as any).reason}`, {
+                toast(`Token Claim Failed! Reason: ${(e as any).reason}`, {
                   icon: "❌",
                   style: toastStyle,
                   position: "bottom-center",
