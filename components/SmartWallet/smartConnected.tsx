@@ -49,6 +49,7 @@ const ClaimTokens: React.FC<ConnectedProps> = () => {
                   style: toastStyle,
                   position: "bottom-center",
                 });
+<<<<<<< Updated upstream
               }}
             >
               Claim 100 Tokens
