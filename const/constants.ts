@@ -9,5 +9,5 @@ export const TWApiKey: string =
     '7a023c31cebbd59b3a6879fd40cc931ae97fb7e5764df9402eb3023ccca38821d455956578e40e4af2d5bf0f033462e65fd961a0b10453455eb4e074f5e7e559'
 export const activeChain: Chain = Mumbai
 
-export const nftDropAddress: string = '0x957B6b8bFd769e2abC592C048D33a9B376BC6A9C'
+export const nftDropAddress: string = '0x49C2d17C17D053D4379f89f4434A710CFf8aDfC8'
 export const tokenAddress: string = '0x4aFB7b3A277738F1991D8bC6057a9C7Fb5572c69'
