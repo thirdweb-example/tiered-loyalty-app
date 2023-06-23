@@ -4,6 +4,8 @@ import {
   coinbaseWallet,
   metamaskWallet,
   walletConnect,
+  paperWallet,
+  localWallet,
 } from "@thirdweb-dev/react";
 import "../styles/globals.css";
 import { Navbar } from "../components/Navbar/Navbar";
@@ -13,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider
       activeChain={activeChain}
-      supportedWallets={[metamaskWallet(), coinbaseWallet(), walletConnect()]}
+      supportedWallets={[localWallet(), metamaskWallet(), coinbaseWallet()]}
     >
       <Navbar />
       <Component {...pageProps} />
