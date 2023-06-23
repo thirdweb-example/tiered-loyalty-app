@@ -1,9 +1,11 @@
 .container {
   max-width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 32px;
   margin-top: 128px;
+  align-items: center;
+  justify-content: center;
 }
 
 .card {
@@ -46,7 +48,7 @@
   flex: 1 1 auto;
   vertical-align: inherit;
   display: flex;
-  max-width: 100%;
+  max-width: 40%;
 }
 
 .listingContainer {
@@ -57,6 +59,9 @@
   max-width: 450px;
   margin-top: 16px;
   margin-right: 16px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .image {
@@ -85,19 +90,26 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 8px;
+  align-items: center;
+  justify-content: center;
 }
 
 .walletContainer {
   position: relative;
-    width: 100%;
-    min-width: 0px;
-    max-width: 100%;
-    top: 0px;
-    margin: 24px;
+  width: 100%;
+  min-width: 0px;
+  max-width: 100%;
+  top: 0px;
+  margin: 24px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .imageContainer {
   position: relative;
+  align-items: center;
+  justify-content: center;
 }
 
 .crossButton {
@@ -119,6 +131,9 @@
   margin-right: 8px;
   margin-left: 16px;
   margin-right: 16px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .collectionName {
@@ -139,6 +154,9 @@
   margin-bottom: 4px;
   margin-left: 16px;
   margin-right: 16px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .nftOwnerContainer {
@@ -268,6 +286,8 @@
   overflow: hidden;
   margin-top: 32px;
   margin-bottom: 24px;
+  align-items: center;
+  justify-content: center;
 }
 
 .pricingInfo {
@@ -299,6 +319,7 @@
   align-items: center;
   justify-content: center;
   margin: 0px;
+  text-align: center;
 }
 
 .listingTime {
@@ -326,6 +347,9 @@
     min-width: 0px;
     max-width: 100%;
     top: 0px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
   .metadataContainer {
