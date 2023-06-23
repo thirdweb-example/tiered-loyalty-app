@@ -98,10 +98,30 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const nft = await contract.erc721.get(tokenId);
 
+  const base64String = nft.metadata.uri.split(",")[1]; // extracts the base64 part of the data URI
+
+  // decodes the base64 string to a regular string
+  const jsonString = Buffer.from(base64String, "base64").toString("utf8");
+
+  // parse the JSON string into an object
+  const jsonObject = JSON.parse(jsonString);
+
+  nft.metadata.uri = jsonObject;
+  nft.metadata.image = jsonObject.image.replace(
+    "ipfs://",
+    "https://ipfs.thirdwebcdn.com/ipfs/"
+  );
+  nft.metadata.name = jsonObject.name;
+
+  console.log(nft.metadata.image, "uri");
+
   let contractMetadata;
 
   try {
     contractMetadata = await contract.metadata.get();
+    if (contractMetadata.description === undefined) {
+      contractMetadata.description = "";
+    }
   } catch (e) {}
 
   return {
@@ -121,6 +141,21 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const nfts = await contract.erc721.getAll();
 
   const paths = nfts.map((nft) => {
+    const base64String = nft.metadata.uri.split(",")[1]; // extracts the base64 part of the data URI
+
+    // decodes the base64 string to a regular string
+    const jsonString = Buffer.from(base64String, "base64").toString("utf8");
+
+    // parse the JSON string into an object
+    const jsonObject = JSON.parse(jsonString);
+
+    nft.metadata.uri = jsonObject;
+    nft.metadata.image = jsonObject.image.replace(
+      "ipfs://",
+      "https://ipfs.thirdwebcdn.com/ipfs/"
+    );
+    nft.metadata.name = jsonObject.name;
+    console.log("nft metadata uri", nft.metadata.name);
     return {
       params: {
         contractAddress: nftDropAddress,

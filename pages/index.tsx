@@ -7,6 +7,7 @@ import {
   useAddress,
   useContract,
   useOwnedNFTs,
+  useContractWrite,
 } from "@thirdweb-dev/react";
 import { nftDropAddress } from "../const/constants";
 import Container from "../components/Container/Container";
@@ -20,7 +21,29 @@ const Home: NextPage = () => {
   const address = useAddress();
   const { contract: nftDropContract } = useContract(nftDropAddress, "nft-drop");
   const { data: nfts, isLoading } = useOwnedNFTs(nftDropContract, address);
+  const {
+    mutateAsync: claimNft,
+    isLoading: loadingClaim,
+    error,
+  } = useContractWrite(nftDropContract, "claim");
 
+  const claim = async (address: string) => {
+    try {
+      await claimNft({ args: [address] });
+      toast("NFT Claimed!", {
+        icon: "✅",
+        style: toastStyle,
+        position: "bottom-center",
+      });
+    } catch (e: any) {
+      console.log(e);
+      toast(`NFT Claim Failed! Reason: ${e.message}`, {
+        icon: "❌",
+        style: toastStyle,
+        position: "bottom-center",
+      });
+    }
+  };
   return (
     <Container maxWidth="lg">
       {address ? (
@@ -40,7 +63,7 @@ const Home: NextPage = () => {
           <div className={styles.btnContainer}>
             <Web3Button
               contractAddress={nftDropAddress}
-              action={async (contract) => await contract?.erc721.claim(1)}
+              action={async () => await claim(address)}
               onSuccess={() => {
                 toast("NFT Claimed!", {
                   icon: "✅",

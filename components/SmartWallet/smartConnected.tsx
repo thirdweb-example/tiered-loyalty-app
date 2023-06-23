@@ -25,6 +25,7 @@ const SmartWalletConnected: React.FC<ConnectedProps> = ({ signer }) => {
 
 // This is the main component that shows the user's token bound smart wallet.
 const ClaimTokens = () => {
+  // this is the token bound account address
   const address = useAddress();
   const { data: tokenBalance, isLoading: loadingBalance } =
     useBalance(tokenAddress);
@@ -40,7 +41,7 @@ const ClaimTokens = () => {
             <h2>Balance: {tokenBalance?.displayValue}</h2>
             <Web3Button
               contractAddress={tokenAddress}
-              action={async (contract) => await contract.erc20.claim(10)}
+              action={async (contract) => await contract.erc20.claim(100)}
               onSuccess={() => {
                 toast(`NFT Claimed!`, {
                   icon: "✅",
@@ -57,7 +58,7 @@ const ClaimTokens = () => {
                 });
               }}
             >
-              Claim 10 Tokens
+              Claim 100 Tokens
             </Web3Button>
           </div>
         )
