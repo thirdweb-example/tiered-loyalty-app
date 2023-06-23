@@ -51,6 +51,13 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
     createSmartWallet(nft);
   }, [nft, smartWalletAddress, address, wallet]);
 
+<<<<<<< Updated upstream
+=======
+  const { contract } = useContract(nftDropAddress);
+  const { data: clientSideNFT } = useNFT(contract, nft.metadata.id);
+  const renderNFT = clientSideNFT || nft;
+
+>>>>>>> Stashed changes
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
