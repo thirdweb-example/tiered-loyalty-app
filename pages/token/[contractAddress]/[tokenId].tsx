@@ -55,7 +55,7 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
 
   const { contract } = useContract(nftDropAddress);
   const { data: clientSideNFT } = useNFT(contract, nft.metadata.id);
-  const renderNFT = nft;
+  const renderNFT = clientSideNFT || nft;
 
   return (
     <>
