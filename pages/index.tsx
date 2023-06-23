@@ -53,12 +53,14 @@ const Home: NextPage = () => {
           <p>Click here to enter your membership</p>
           {nfts ? (
             nfts.length > 0 ? (
-              <NFTComponent
-                nft={nfts[0]}
-                emptyText={
-                  "Looks like you don't have a membership. Created a membership to continue"
-                }
-              />
+              <div className={styles.nftContainer}>
+                <NFTComponent
+                  nft={nfts[0]}
+                  emptyText={
+                    "Looks like you don't have a membership. Created a membership to continue"
+                  }
+                />
+              </div>
             ) : (
               <div className={styles.btnContainer}>
                 <Web3Button
