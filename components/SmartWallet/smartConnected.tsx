@@ -10,21 +10,26 @@ import { Signer } from "ethers";
 import style from "../../styles/Token.module.css";
 import toast from "react-hot-toast";
 import toastStyle from "../../util/toastConfig";
+
 interface ConnectedProps {
-  signer: Signer | undefined;
+  signer?: Signer | undefined;
+  refetch: () => void;
 }
 
 // ThirdwebSDKProvider is a wrapper component that provides the smart wallet signer and active chain to the Thirdweb SDK.
-const SmartWalletConnected: React.FC<ConnectedProps> = ({ signer }) => {
+const SmartWalletConnected: React.FC<ConnectedProps> = ({
+  signer,
+  refetch,
+}) => {
   return (
     <ThirdwebSDKProvider signer={signer} activeChain={activeChain}>
-      <ClaimTokens />
+      <ClaimTokens refetch={refetch} />
     </ThirdwebSDKProvider>
   );
 };
 
 // This is the main component that shows the user's token bound smart wallet.
-const ClaimTokens = () => {
+const ClaimTokens: React.FC<ConnectedProps> = ({ refetch }) => {
   // this is the token bound account address
   const address = useAddress();
   const { data: tokenBalance, isLoading: loadingBalance } =
@@ -48,14 +53,7 @@ const ClaimTokens = () => {
                   style: toastStyle,
                   position: "bottom-center",
                 });
-              }}
-              onError={(e) => {
-                console.log(e);
-                toast(`Token Claim Failed! Reason: ${(e as any).reason}`, {
-                  icon: "❌",
-                  style: toastStyle,
-                  position: "bottom-center",
-                });
+                refetch;
               }}
             >
               Claim 100 Tokens

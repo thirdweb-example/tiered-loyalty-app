@@ -23,7 +23,7 @@ export function Navbar() {
 
           <div className={styles.navMiddle}>
             <Link href="/" className={styles.link}>
-              Your NFTs
+              Your Membership
             </Link>
           </div>
         </div>
