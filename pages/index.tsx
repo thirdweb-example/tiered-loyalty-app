@@ -21,11 +21,7 @@ import Skeleton from "../components/Skeleton/Skeleton";
 const Home: NextPage = () => {
   const address = useAddress();
   const { contract: nftDropContract } = useContract(nftDropAddress, "nft-drop");
-  const {
-    data: nfts,
-    isLoading,
-    refetch,
-  } = useOwnedNFTs(nftDropContract, address);
+  const { data: nfts, isLoading } = useOwnedNFTs(nftDropContract, address);
   const {
     mutateAsync: claimNft,
     isLoading: loadingClaim,
