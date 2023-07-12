@@ -1,7 +1,6 @@
 import { ethers } from "ethers";
 import { SmartWallet } from "@thirdweb-dev/wallets";
 import {
-  TWApiKey,
   factoryAddress,
   activeChain,
   nftDropAddress,
