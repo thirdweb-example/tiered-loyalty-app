@@ -3,7 +3,7 @@ import {
   ThirdwebNftMedia,
   useAddress,
   useContract,
-  useNFT,
+  useOwnedNFTs,
   useWallet,
 } from "@thirdweb-dev/react";
 import React, { useEffect, useState } from "react";
@@ -54,6 +54,8 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
   }, [nft, smartWalletAddress, address, wallet]);
 
   const { contract } = useContract(nftDropAddress);
+  const { data: clientSideNFT } = useOwnedNFTs(contract, address);
+  const renderNFT = clientSideNFT ? clientSideNFT[0] : nft;
 
   return (
     <>
@@ -62,7 +64,7 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
         <div className={styles.container}>
           <div className={styles.metadataContainer}>
             <ThirdwebNftMedia
-              metadata={nft.metadata}
+              metadata={renderNFT.metadata}
               className={styles.image}
             />
           </div>
@@ -96,7 +98,9 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
 export const getStaticProps: GetStaticProps = async (context) => {
   const tokenId = context.params?.tokenId as string;
 
-  const sdk = new ThirdwebSDK(activeChain);
+  const sdk = new ThirdwebSDK(activeChain, {
+    thirdwebApiKey: process.env.THIRDWEB_API_KEY,
+  });
 
   const contract = await sdk.getContract(nftDropAddress);
 
@@ -138,7 +142,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const sdk = new ThirdwebSDK(activeChain);
+  const sdk = new ThirdwebSDK(activeChain, {
+    thirdwebApiKey: process.env.THIRDWEB_API_KEY,
+  });
 
   const contract = await sdk.getContract(nftDropAddress);
 

@@ -18,7 +18,11 @@ interface ConnectedProps {
 // ThirdwebSDKProvider is a wrapper component that provides the smart wallet signer and active chain to the Thirdweb SDK.
 const SmartWalletConnected: React.FC<ConnectedProps> = ({ signer }) => {
   return (
-    <ThirdwebSDKProvider signer={signer} activeChain={activeChain}>
+    <ThirdwebSDKProvider
+      signer={signer}
+      activeChain={activeChain}
+      thirdwebApiKey={process.env.THIRDWEB_API_KEY}
+    >
       <ClaimTokens />
     </ThirdwebSDKProvider>
   );
