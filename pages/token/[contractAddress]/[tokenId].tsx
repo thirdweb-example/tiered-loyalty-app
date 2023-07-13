@@ -54,6 +54,8 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
   }, [nft, smartWalletAddress, address, wallet]);
 
   const { contract } = useContract(nftDropAddress);
+  const { data: clientSideNFT } = useNFT(contract, nft.metadata.id);
+  const renderNFT = clientSideNFT || nft;
 
   return (
     <>
@@ -62,7 +64,7 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
         <div className={styles.container}>
           <div className={styles.metadataContainer}>
             <ThirdwebNftMedia
-              metadata={nft.metadata}
+              metadata={renderNFT.metadata}
               className={styles.image}
             />
           </div>
@@ -77,7 +79,7 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
                 <p className={styles.collectionName}>{contractMetadata.name}</p>
               </div>
             )}
-            <h1 className={styles.title}>{nft.metadata.name}</h1>
+            <h1 className={styles.title}>{renderNFT.metadata.name}</h1>
             <p className={styles.collectionName}>Token ID #{nft.metadata.id}</p>
             {smartWalletAddress ? (
               <SmartWalletConnected signer={signer} />

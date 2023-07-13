@@ -6,7 +6,7 @@ export const implementation: string = '0xa786cF1e3245C792474c5cc7C23213fa2c111A9
 
 // Your thirdweb api key - you can get one at https://thirdweb.com/dashboard/api-keys
 export const TWApiKey: string =
-    '7a023c31cebbd59b3a6879fd40cc931ae97fb7e5764df9402eb3023ccca38821d455956578e40e4af2d5bf0f033462e65fd961a0b10453455eb4e074f5e7e559'
+    'pk-d176e2f0c71c343a81d97cfc1053c890cb488d7d9ed1bf86'
 export const activeChain: Chain = Mumbai
 
 export const nftDropAddress: string = '0x7c7F84b831Ab97d7C2D3fF6385B22D1762baCA36'
