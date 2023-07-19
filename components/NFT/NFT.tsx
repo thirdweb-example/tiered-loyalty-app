@@ -2,7 +2,6 @@ import { ThirdwebNftMedia } from "@thirdweb-dev/react";
 import { NFT } from "@thirdweb-dev/sdk";
 import React from "react";
 import styles from "./NFT.module.css";
-import Skeleton from "../Skeleton/Skeleton";
 import Link from "next/link";
 import { nftDropAddress } from "../../const/constants";
 
