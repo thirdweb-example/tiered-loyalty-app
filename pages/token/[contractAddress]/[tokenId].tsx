@@ -10,7 +10,11 @@ import React, { useEffect, useState } from "react";
 import Container from "../../../components/Container/Container";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { NFT, ThirdwebSDK } from "@thirdweb-dev/sdk";
-import { activeChain, nftDropAddress, TWApiKey } from "../../../const/constants";
+import {
+  activeChain,
+  nftDropAddress,
+  TWApiKey,
+} from "../../../const/constants";
 import styles from "../../../styles/Token.module.css";
 import { Toaster } from "react-hot-toast";
 import { Signer } from "ethers";
