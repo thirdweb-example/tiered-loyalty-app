@@ -9,12 +9,13 @@ import {
 } from "@thirdweb-dev/react";
 import "../styles/globals.css";
 import { Navbar } from "../components/Navbar/Navbar";
-import { activeChain } from "../const/constants";
+import { activeChain, TWApiKey } from "../const/constants";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider
-      activeChain={activeChain}
+      activeChain={activeChain} 
+      clientId={TWApiKey}
       supportedWallets={[localWallet(), metamaskWallet(), coinbaseWallet()]}
     >
       <Navbar />

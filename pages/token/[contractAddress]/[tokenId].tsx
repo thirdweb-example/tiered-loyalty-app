@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import Container from "../../../components/Container/Container";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { NFT, ThirdwebSDK } from "@thirdweb-dev/sdk";
-import { activeChain, nftDropAddress } from "../../../const/constants";
+import { activeChain, nftDropAddress, TWApiKey } from "../../../const/constants";
 import styles from "../../../styles/Token.module.css";
 import { Toaster } from "react-hot-toast";
 import { Signer } from "ethers";
@@ -98,7 +98,7 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
 export const getStaticProps: GetStaticProps = async (context) => {
   const tokenId = context.params?.tokenId as string;
 
-  const sdk = new ThirdwebSDK(activeChain);
+  const sdk = new ThirdwebSDK(activeChain, { clientId: TWApiKey });
 
   const contract = await sdk.getContract(nftDropAddress);
 
@@ -140,7 +140,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const sdk = new ThirdwebSDK(activeChain);
+  const sdk = new ThirdwebSDK(activeChain, { clientId: TWApiKey });
 
   const contract = await sdk.getContract(nftDropAddress);
 
